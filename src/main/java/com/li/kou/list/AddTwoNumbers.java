@@ -1,4 +1,4 @@
-package com.li.kou;
+package com.li.kou.list;
 
 /**
  *
