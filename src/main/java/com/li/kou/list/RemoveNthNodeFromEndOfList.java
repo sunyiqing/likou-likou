@@ -31,10 +31,28 @@ public class RemoveNthNodeFromEndOfList {
         l13.next = l14;
         RemoveNthNodeFromEndOfList removeNthNodeFromEndOfList = new RemoveNthNodeFromEndOfList();
 
-        removeNthNodeFromEndOfList.removeNthFromEnd1(l1,1);
+        removeNthNodeFromEndOfList.removeNthFromEnd1(l1,5);
+
 
     }
 
+    /**
+     * dummy 存在的意义就是当n = 倒数最大那个数的时候要保证不空指针，并且能移除第一位
+     *
+     * 举例 n = 4 , 2 要被踢出
+     * 经历一轮循环
+     * first 是 6
+     * second 是 0 1 2 4 5 6
+     *
+     * 经理第二次循环
+     * first 是 null
+     * second 是  1 2 3 4 5 6
+     *
+     * 得到 1 3 4 5 6
+     * @param head
+     * @param n
+     * @return
+     */
     public ListNode removeNthFromEnd1(ListNode head, int n) {
         ListNode dummy = new ListNode(0);
         dummy.next = head;
@@ -49,7 +67,7 @@ public class RemoveNthNodeFromEndOfList {
             first = first.next;
             second = second.next;
         }
-        second.next = second.next.next;
+        second.next = second.next.next;  //删除某个元素
         return dummy.next;
     }
 
