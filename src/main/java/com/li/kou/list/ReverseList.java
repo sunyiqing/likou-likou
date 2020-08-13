@@ -2,6 +2,7 @@ package com.li.kou.list;
 
 /**
  * 单链表反转
+ * https://www.cnblogs.com/keeya/p/9218352.html
  */
 
 import com.li.kou.common.ListNode;
