@@ -14,12 +14,29 @@ public class ReverseList {
         ListNode l12 = new ListNode(3);
         l1.next = l11;
         l11.next = l12;
-        ListNode listNode = reverseList1(l1);
+//        ListNode listNode = reverseList1(l1);
+        ListNode listNode1 = reverseList2(l1);
         System.out.println(1);
 
     }
 
 
+    /**
+     * TODO:没有看懂
+     * @param head
+     * @return
+     */
+    private static ListNode reverseList2(ListNode head){
+        if (head == null || head.next == null)
+            return head;
+
+        ListNode temp = head.next;
+
+        ListNode newHead = reverseList2(head.next);
+        temp.next = head;
+        head.next = null;
+        return newHead;
+    }
     /**
      * 0、2——>4——>3
      * 1、4——>3   2——>null
