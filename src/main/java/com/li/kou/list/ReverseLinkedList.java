@@ -7,7 +7,7 @@ package com.li.kou.list;
 
 import com.li.kou.common.ListNode;
 
-public class ReverseList {
+public class ReverseLinkedList {
 
     public static void main(String[] args) {
         ListNode l1 = new ListNode(2);
