@@ -1,5 +1,7 @@
 package com.li.kou.stack;
 
+import java.util.Stack;
+
 /**
  * 接雨水
  *
@@ -15,6 +17,8 @@ package com.li.kou.stack;
  输出: 6
 
  * Created by yiqing on 2020/9/1.
+ *
+ * https://mp.weixin.qq.com/s/f9ebzbwymR8jQeUDxjeCDA
  */
 public class TrappingRainWate {
 
@@ -22,10 +26,12 @@ public class TrappingRainWate {
     public static void main(String[] args) {
 //        int[] height = {0,1,0,2,1,0,1,3,2,1,2,1};
 //       int[] height = {4,2,1,3};
-        int[] height = {4,2,4};
+        int[] height = {4,2,2,4};
         TrappingRainWate wate = new TrappingRainWate();
         System.out.println(wate.trap1(height));
         System.out.println(wate.trap2(height));
+        System.out.println(wate.trap3(height));
+
     }
 
     /**
@@ -85,5 +91,39 @@ public class TrappingRainWate {
         }
         return result;
 
+    }
+
+    /**
+     * 单调栈
+     *
+     * 这道题目可以用单调栈来做。单调栈就是比普通的栈多一个性质，即维护栈内元素单调。
+     * 比如当前某个单调递减的栈的元素从栈底到栈顶分别是：[10, 9, 8, 3, 2]，
+     * 如果要入栈元素5，需要把栈顶元素pop出去，直到满足单调递减为止，即先变成[10, 9, 8]，再入栈5，就是[10, 9, 8, 5]。
+     * @param height
+     * @return
+     */
+    public int trap3(int[] height) {
+        //存元素指针
+        Stack<Integer> stack = new Stack<Integer>();
+        int result = 0;
+        if (height.length < 3){
+            return result;
+        }
+
+        for (int i = 0; i < height.length; i++) {
+            while (!stack.isEmpty() && height[stack.peek()] < height[i]){
+                Integer bottomIdx  = stack.pop();
+                while (!stack.isEmpty() && height[stack.peek()] == height[bottomIdx]){
+                    stack.pop();
+                }
+                if (!stack.isEmpty()){
+                    result += (Math.min(height[stack.peek()],height[i]) - height[bottomIdx]) * (i - stack.peek() - 1);
+                }
+
+            }
+            stack.push(i);
+        }
+
+        return result;
     }
 }
