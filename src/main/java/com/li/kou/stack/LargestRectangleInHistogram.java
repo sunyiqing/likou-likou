@@ -23,7 +23,7 @@ package com.li.kou.stack;
  *
  * 输入: [2,1,5,6,2,3]
  * 输出: 10
- *
+ * https://leetcode-cn.com/problems/largest-rectangle-in-histogram/solution/bao-li-jie-fa-zhan-by-liweiwei1419/
  * 来源：力扣（LeetCode）
  * 链接：https://leetcode-cn.com/problems/largest-rectangle-in-histogram
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
@@ -31,25 +31,43 @@ package com.li.kou.stack;
 public class LargestRectangleInHistogram {
 
     public static void main(String[] args) {
-//        int[] heights = {2,1,5,1,2,3};
-        int[] heights = {1};
+        int[] heights = {2,1,5,6,2,3};
 
         LargestRectangleInHistogram l = new LargestRectangleInHistogram();
         System.out.println(l.largestRectangleArea1(heights));
     }
+
+
+    /**
+     * 暴力破解的方法
+     * @param heights
+     * @return
+     */
     public int largestRectangleArea1(int[] heights) {
         int result = 0;
-        if (heights == null || heights.length <= 0){
+        if (heights == null || heights.length == 0){
             return result;
         }
-        if (heights.length == 1){
-            return heights[0];
+
+        for (int i = 0; i < heights.length; i++) {
+            int curHeight = heights[i];
+
+            //从当前元素左边开始 向左边比较，一直到比当前元素要小
+            int left = i;
+            while (left > 0 && heights[left - 1] >= curHeight){
+                left--;
+            }
+
+            //从当前元素右边开始，向右比较，一直到比当前元素要小
+            int rigth = i;
+            while (rigth <  heights.length - 1 && heights[rigth + 1] >= curHeight){
+                rigth ++;
+            }
+
+            int width = rigth - left + 1;
+            result = Math.max(result,width * curHeight);
         }
 
-        for (int i = 0; i < heights.length - 1; i++) {
-            int min = Math.min(heights[i],heights[i + 1]);
-            result = Math.max(result, min);
-        }
-        return result * 2;
+        return result;
     }
 }
