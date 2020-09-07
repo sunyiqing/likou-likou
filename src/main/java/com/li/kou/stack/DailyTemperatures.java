@@ -1,5 +1,10 @@
 package com.li.kou.stack;
 
+import com.alibaba.fastjson.JSON;
+
+import java.util.Deque;
+import java.util.LinkedList;
+
 /**
  *
  * 739. 每日温度
@@ -17,11 +22,13 @@ public class DailyTemperatures {
 
 
     public static void main(String[] args) {
-        int[] temperatures = {73, 74, 75, 71, 69, 72, 76, 73};
+        int[] temperatures = {73, 72, 71, 76, 69, 72, 76, 73};
 //        int[] temperatures = {73};
         DailyTemperatures dailyTemperatures = new DailyTemperatures();
         int[] ints = dailyTemperatures.dailyTemperatures(temperatures);
+        int[] ints1 = dailyTemperatures.dailyTemperatures1(temperatures);
         System.out.println(1);
+
 
     }
 
@@ -42,12 +49,27 @@ public class DailyTemperatures {
                     res[i] = j - i;
                     break;
                 }
-                if (j == T.length -1){
-                    res[i] = 0;
-                }
             }
         }
         return res;
+    }
+
+    /**
+     * 单调栈 从左到右边，只要当前数据 大于栈顶数据就出栈
+     * 0
+     * 0 1
+     * 0 1 2
+     * 3
+     * 3 4
+     * 3 5
+     * 3 6
+     * 3 6 7
+     *
+     * @param T
+     * @return
+     */
+    public int[] dailyTemperatures1(int[] T){
+
     }
 
 
