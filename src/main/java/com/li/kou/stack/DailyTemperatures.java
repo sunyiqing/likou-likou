@@ -69,7 +69,16 @@ public class DailyTemperatures {
      * @return
      */
     public int[] dailyTemperatures1(int[] T){
+        int len = T.length;
+        int[] res = new int[len];
+        Deque<Integer> stack = new LinkedList<Integer>();
+        for (int i = 0; i < len; i++) {
+            while (!stack.isEmpty() && T[i] > T[stack.peek()]){
+                stack.pop();
+            }
 
+        }
+        return res;
     }
 
 
